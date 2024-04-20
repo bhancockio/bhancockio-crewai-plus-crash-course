@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "email_automation"
+version = "0.1.0"
+description = "email_automation using crewAI"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<=3.13"
+crewai = {extras = ["tools"], version = "^0.28.8"}
+email-validator = "^2.1.1"
+pydantic = "^2.6.3"
+langchain-groq = "^0.0.1"
+requests = "^2.31.0"
+agentops = "^0.1.6"
+
+[tool.poetry.scripts]
+email_automation = "email_automation.main:run"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
