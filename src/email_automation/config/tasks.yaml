@@ -40,6 +40,7 @@ notes_analyzer_task:
 
     # Important Notes:
     - It is important that each action item includes the responsible department, contact person, context, expected outcome, and deadline.
+    - You must include the persons contact name in each action item.
     - You must use the company background document to match each action item with the relevant department and contact.
     - Do not make up names or fake departments; ensure all information is accurate and consistent with the company background.
 
@@ -58,50 +59,33 @@ notes_analyzer_task:
   expected_output: >
     A detailed correlation of action items from the meeting notes with relevant company context, presented as a structured summary. This summary should include the tasks, responsible departments and individuals, contact information, and any additional context from the company document that informs or impacts the action items.
 
-email_writing_task:
+write_and_send_email_task:
   description: >
     # Overview
-    Draft a single email based on the action items and context provided by the notes_analyzer_task, ensuring it's ready for dispatch to the appropriate contact.
+    Draft and send a single email based on the action items and context provided by the notes_analyzer_task, ensuring it reaches the appropriate contact immediately after drafting.
+    Include as much detail as possible in the email to ensure that the recipient understands the task, context, expected outcome, and deadline.
 
     # Important Notes:
-    - You are responsible for writing emails.
-    - If you are missing the email's receipients name, email, or content for the email, do not proceed with sending the email.
+    - You are responsible for writing and sending emails.
+    - If you are missing the recipient's name, email, or content for the email, do not proceed with sending the email.
     - DO NOT make up email content or recipient information.
-    - Use the writing style of Justin Welsh.
+    - Make sure you address the recipient by name.
+    - Make sure the email is well formatted, using bullet points or numbered lists for clarity.
+    - Break up the email into sections for easy reading, including an overview, background information, detailed instructions, action steps, and contact information.
+    - All emails are being sent from the Founder. You must include the Founder's name and email address in the email signature.
+      - Founder's Name: Brandon Hancock
+      - Founder's Email: brandon.hancock@quantumsolutions.tech
 
     # Input:
     - A specific action item with detailed context, including the responsible department's contact details.
 
     # Process:
     - Construct the email ensuring it includes a subject line and a detailed message body, which outlines the task, context, expected outcome, and deadline.
-    - Ensure that the email format is professional, concise, and encourages collaboration and prompt response.
-
-  expected_output: >
-    A single email formatted with:
-    - Recipient's name
-    - Recipient's email address
-    - Subject line
-    - Body of the email detailing the task, context, and deadline
-
-send_email_task:
-  description: >
-    # Overview
-    Send a single email prepared by the email_writing_task. This task is responsible for handling the dispatch of the email, ensuring it reaches the intended recipient.
-
-    # Important Notes:
-    - You are not responsible for writing or editing emails. Your task is to send the email as provided.
-    - If you are missing any input information, do not proceed with sending the email.
-    - DO NOT make up email content or recipient information.
-
-    # Input:
-    - A single email, including the recipient's name, email address, subject, and the body content of the email.
-
-    # Process:
-    - Verify the recipient's email address, email subject, and bodyof the email.
-    - Send the email and await confirmation from the server.
+    - Verify the recipient’s email address, email subject, and body of the email.
+    - Send the email immediately after drafting and await confirmation from the server.
     - Log the attempt, noting any errors or confirmation of successful dispatch.
 
   expected_output: >
-    Confirmation of the email sending status:
-    - Success: Confirmation message stating the email was sent successfully.
-    - Failure: Error message detailing why the email could not be sent.
+    - A single email sent and a confirmation of the email sending status:
+      - Success: Confirmation message stating the email was sent successfully.
+      - Failure: Error message detailing why the email could not be sent, including missing information or server errors.

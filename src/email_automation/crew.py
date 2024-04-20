@@ -4,7 +4,7 @@ from crewai.project import CrewBase, agent, crew, task
 from email_automation.tools.send_email_tool import SendEmailTool
 from langchain_groq import ChatGroq
 from langchain_openai import ChatOpenAI
-from email_automation.models.email_content import EmailContent
+from email_automation.models.email_content import EmailDeliveryContent
 
 
 @CrewBase
@@ -19,9 +19,6 @@ class EmailAutomationCrew():
             api_key=os.getenv("GROQ_API_KEY"),
             model="mixtral-8x7b-32768"
         )
-
-    def send_email(self, task_output):
-        print("Email output:", task_output.raw_output)
 
     @agent
     def coordination_agent(self) -> Agent:
@@ -39,16 +36,9 @@ class EmailAutomationCrew():
         )
 
     @agent
-    def email_writer_agent(self) -> Agent:
+    def write_and_send_email_agent(self) -> Agent:
         return Agent(
-            config=self.agents_config['email_writer_agent'],
-            verbose=True
-        )
-
-    @agent
-    def send_email_agent(self) -> Agent:
-        return Agent(
-            config=self.agents_config['send_email_agent'],
+            config=self.agents_config['write_and_send_email_agent'],
             tools=[SendEmailTool()],
             verbose=True,
         )
@@ -69,19 +59,11 @@ class EmailAutomationCrew():
         )
 
     @task
-    def email_writing_task(self) -> Task:
+    def write_and_send_email_task(self) -> Task:
         return Task(
-            config=self.tasks_config['email_writing_task'],
-            agent=self.email_writer_agent(),
-            callback=self.send_email,
-            output_pydantic=EmailContent
-        )
-
-    @task
-    def send_email_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['send_email_task'],
-            agent=self.notes_analyzer_agent(),
+            config=self.tasks_config['write_and_send_email_task'],
+            agent=self.write_and_send_email_agent(),
+            output_pydantic=EmailDeliveryContent
         )
 
     @crew
