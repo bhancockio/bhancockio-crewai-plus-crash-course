@@ -15,10 +15,6 @@ class EmailAutomationCrew():
 
     def __init__(self):
         self.manager_llm = ChatOpenAI()
-        self.llm = ChatGroq(
-            api_key=os.getenv("GROQ_API_KEY"),
-            model="mixtral-8x7b-32768"
-        )
 
     @agent
     def coordination_agent(self) -> Agent:

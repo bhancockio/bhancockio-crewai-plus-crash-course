@@ -99,7 +99,7 @@ def run():
             ## Contact for Strategic Partnerships and Major Initiatives
             - **CEO:** Rachel Torres
             - **Email:** rachel.torres@quantumsolutions.tech
-
+j
         """
     }
     EmailAutomationCrew().crew().kickoff(inputs=inputs)
